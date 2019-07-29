@@ -5,7 +5,7 @@
 </head>
 
 <body>
-  <p>2ch</p>
+  <h1>2ch</h1>
   <?php
   for ($i = 0; $i < count($threads); $i += 1) {
     if ($i % 3 === 0) {

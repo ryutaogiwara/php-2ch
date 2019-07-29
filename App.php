@@ -1,23 +1,55 @@
 <?php
+// 各ファイル読み込み
+require('Request.php');
+require('View.php');
+
 // クラスとはデータの設計図のようなもの。
 // そのままでは使うことはできず、メソッドを使うことで取り出すことができる
 class App
 {
+  // ③両private関数のプロパティに②のインスタンス変数がセットされる
+  // インスタンスがセットされたことでこのprivate関数はAppクラス内のどこでも使える
+  private $request;
+  private $view;
+
+  // ②それぞれインスタンス化する
+  private function initialize()
+  {
+    $this->request = new Request;
+    $this->view    = new View;
+  }
+
+  // getPathInfoメソッドの実行
+  private function getPathInfo()
+  {
+    // ④ルーティング
+    return $this->request->getPathInfo();
+  }
+
+  // パスインフォからパスを生成するメソッド
+  private function split($path_info)
+  {
+    // explode関数により$path_infoの値を'/'ごとに分割
+    return explode('/', $path_info);
+  }
+
   // runメソッドを定義。
   public function run()
   {
-    // Data.phpの読み込み
-    require('Data.php');
-    // Dataクラス（処理）を一つの変数＄dataとして定義（インスタンス化）
-    $data = new Data;
-    // dataインスタンス内のgetTreadsメソッドを実行し結果を$threadsと定義
-    $threads = $data->getThreads();
+    // ①initializeメソッドを呼び出す
+    $this->initialize();
 
-    // ob_start,ob_get_cleanはセットで使うことで出力のタイミングを任意に調整できる（間に処理を入れることができる）
-    ob_start();
-    require('Board.php');
-    $html = ob_get_clean();
+    // ルーティングパスの取得
+    $path_info = $this->getPathInfo();
+    $action = $this->split($path_info);
 
-    echo $html;
+    if (isset($action[1]) && $action[1] === '') {
+      // ⑤ビューのレンダリング
+      $this->view->rend();
+    } elseif ($action[1] === 'post') {
+      echo 'post';
+    } else {
+      echo 'page404';
+    }
   }
 }
