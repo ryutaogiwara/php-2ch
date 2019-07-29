@@ -2,21 +2,24 @@
 // 各ファイル読み込み
 require('Request.php');
 require('View.php');
+require('Dbcon.php');
 
 // クラスとはデータの設計図のようなもの。
 // そのままでは使うことはできず、メソッドを使うことで取り出すことができる
 class App
 {
-  // ③両private関数のプロパティに②のインスタンス変数がセットされる
+  // ③private関数のプロパティに②のインスタンス変数がセットされる
   // インスタンスがセットされたことでこのprivate関数はAppクラス内のどこでも使える
   private $request;
   private $view;
+  private $dbcon;
 
   // ②それぞれインスタンス化する
   private function initialize()
   {
     $this->request = new Request;
     $this->view    = new View;
+    $this->dbcon   = new Dbcon;
   }
 
   // getPathInfoメソッドの実行
@@ -38,6 +41,8 @@ class App
   {
     // ①initializeメソッドを呼び出す
     $this->initialize();
+    // DbConnectメソッドを呼び出す
+    $this->dbcon->dbConnect();
 
     // ルーティングパスの取得
     $path_info = $this->getPathInfo();
