@@ -1,1 +1,5 @@
-<p> hello world </p>
+<?php
+require('../App.php');
+$app = new App;
+
+$app->run();
