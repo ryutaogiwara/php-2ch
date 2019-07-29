@@ -3,6 +3,12 @@
 // そのままでは使うことはできず、メソッドを使うことで取り出すことができる
 class App
 {
+  private function getPathInfo()
+  {
+    require('Request.php');
+    $request = new Request;
+  }
+
   // runメソッドを定義。
   public function run()
   {
