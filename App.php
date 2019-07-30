@@ -58,12 +58,12 @@ class App
       $threads = $data->getThreads();
 
       // ⑤引数を置くことで対応するビューのレンダリング
-      $this->view->rend();
+      $this->view->rend('Board.php');
     } elseif ($action[1] === 'post') {
       echo 'post';
     } else {
       // 404エラーページのレンダリング
-      $this->view->rend();
+      $this->view->rend('404Error.php');
     }
   }
 }
