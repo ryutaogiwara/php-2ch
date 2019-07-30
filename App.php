@@ -57,11 +57,12 @@ class App
       // dataインスタンス内のgetTreadsメソッドを実行し結果を$threadsと定義
       $threads = $data->getThreads();
 
-      // ⑤ビューのレンダリング
+      // ⑤引数を置くことで対応するビューのレンダリング
       $this->view->rend();
     } elseif ($action[1] === 'post') {
       echo 'post';
     } else {
+      // 404エラーページのレンダリング
       $this->view->rend();
     }
   }
