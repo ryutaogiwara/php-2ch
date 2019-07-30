@@ -8,9 +8,23 @@ class Dbcon
     $user = 'root';
     $password = 'root';
 
-    try {
+    // 条件分岐ー成功時の処理
+    try {　
       $dbh = new PDO($dsn, $user, $password);
-      // echo "接続成功\n";
+      $user_name = '確認';
+      $body = 'テスト';
+
+      $sql = "INSERT INTO threads(user_name, body) VALUES(:user_name, :body)";
+      $stmt = $dbh->prepare($sql);
+
+      $stmt->bindParam(':user_name', $user_name, PDO::PARAM_STR);
+      $stmt->bindParam(':body', $body, PDO::PARAM_STR);
+      // var_dump($stmt);
+
+      // $stmtの実行
+      $stmt->execute();
+
+    // 失敗時の処理
     } catch (PDOException $e) {
       echo "接続失敗: " . $e->getMessage() . "\n";
       exit();
@@ -19,21 +33,5 @@ class Dbcon
     // $options = array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET CHARACTER SET 'utef8'");
     // $pdo = new PDO('mysql:dbname=2ch_db; host=localhost:8889', 'root', 'root', $options);
 
-    $user_name = '確認';
-    $body = 'テスト';
-
-    $sql = "INSERT INTO threads(user_name, body) VALUES(:user_name, :body)";
-    $stmt = $dbh->prepare($sql);
-
-
-
-    $stmt->bindParam(':user_name', $user_name, PDO::PARAM_STR);
-    $stmt->bindParam(':body', $body, PDO::PARAM_STR);
-
-
-
-    var_dump($stmt);
-
-    $stmt->execute();
   }
 }
