@@ -3,16 +3,16 @@ class Dbcon
 {
   public function dbConnect()
   {
-    // ドライバ呼び出しを使用して MySQL データベースに接続します
+    // ドライバ呼び出しを使用して MySQL データベースに接続
     $dsn = 'mysql:dbname=2ch_db; host=localhost:8889';
     $user = 'root';
     $password = 'root';
+    $dbh = new PDO($dsn, $user, $password);
 
     // 条件分岐ー成功時の処理
-    try {　
-      $dbh = new PDO($dsn, $user, $password);
-      $user_name = '確認';
-      $body = 'テスト';
+    try {
+      $user_name = 'user';
+      $body = 'body';
 
       $sql = "INSERT INTO threads(user_name, body) VALUES(:user_name, :body)";
       $stmt = $dbh->prepare($sql);
