@@ -49,12 +49,20 @@ class App
     $action = $this->split($path_info);
 
     if (isset($action[1]) && $action[1] === '') {
+      // Board.phpを読み込むための処理
+      // Data.phpの読み込み
+      require('Data.php');
+      // Dataクラス（処理）を一つの変数＄dataとして定義（インスタンス化）
+      $data = new Data;
+      // dataインスタンス内のgetTreadsメソッドを実行し結果を$threadsと定義
+      $threads = $data->getThreads();
+
       // ⑤ビューのレンダリング
       $this->view->rend();
     } elseif ($action[1] === 'post') {
       echo 'post';
     } else {
-      echo 'page404';
+      $this->view->rend();
     }
   }
 }
