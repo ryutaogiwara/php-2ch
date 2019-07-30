@@ -56,13 +56,13 @@ class App
       $data = new Data;
       // dataインスタンス内のgetTreadsメソッドを実行し結果を$threadsと定義
       $threads = $data->getThreads();
-
       // ⑤引数を置くことで対応するビューのレンダリング
-      $this->view->rend('Board.php');
+      $this->view->rend('Board.php', $threads);
     } elseif ($action[1] === 'post') {
       echo 'post';
     } else {
       // 404エラーページのレンダリング
+      header('HTTP/1.0 404 Not Found');
       $this->view->rend('404Error.php');
     }
   }
