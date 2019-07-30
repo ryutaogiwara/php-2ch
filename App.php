@@ -49,12 +49,21 @@ class App
     $action = $this->split($path_info);
 
     if (isset($action[1]) && $action[1] === '') {
-      // ⑤ビューのレンダリング
-      $this->view->rend();
+      // Board.phpを読み込むための処理
+      // Data.phpの読み込み
+      require('Data.php');
+      // Dataクラス（処理）を一つの変数＄dataとして定義（インスタンス化）
+      $data = new Data;
+      // dataインスタンス内のgetTreadsメソッドを実行し結果を$threadsと定義
+      $threads = $data->getThreads();
+      // ⑤引数を置くことで対応するビューのレンダリング
+      $this->view->rend('Board.php', $threads);
     } elseif ($action[1] === 'post') {
       echo 'post';
     } else {
-      echo 'page404';
+      // 404エラーページのレンダリング
+      header('HTTP/1.0 404 Not Found');
+      $this->view->rend('404Error.php');
     }
   }
 }
