@@ -13,13 +13,11 @@ class Dbcon
     return $dbh;
   }
     
-  public function postThread()
+  public function postThread($user_name, $body)
   {
     // 条件分岐ー成功時の処理
     try {
-      $user_name = 'user';
-      $body = 'body';
-
+      $dbh = $this->dbConnect();
       $sql = "INSERT INTO threads(user_name, body) VALUES(:user_name, :body)";
       $stmt = $dbh->prepare($sql);
 
@@ -30,6 +28,7 @@ class Dbcon
       // $stmtの実行
       $stmt->execute();
 
+      echo '投稿が完了しました';
     // 失敗時の処理
     } catch (PDOException $e) {
       echo "接続失敗: " . $e->getMessage() . "\n";
