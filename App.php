@@ -59,7 +59,10 @@ class App
       // ⑤引数を置くことで対応するビューのレンダリング
       $this->view->rend('Board.php', $threads);
     } elseif ($action[1] === 'post') {
-      echo 'post';
+      $user_name = '最終';
+      $body = '確認';
+      $this->dbcon->postThread($user_name, $body);
+      echo '投稿が完了しました';
     } else {
       // 404エラーページのレンダリング
       header('HTTP/1.0 404 Not Found');
