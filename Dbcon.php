@@ -7,7 +7,9 @@ class Dbcon
     $dsn = 'mysql:dbname=2ch_db; host=localhost:8889';
     $user = 'root';
     $password = 'root';
-    $dbh = new PDO($dsn, $user, $password);
+    $options = array(PDO::MYSQL_ATTR_INIT_COMMAND =>"SET CHARACTER SET 'utf8'");
+    $dbh = new PDO($dsn, $user, $password, $options);
+    
 
     // 条件分岐ー成功時の処理
     try {
