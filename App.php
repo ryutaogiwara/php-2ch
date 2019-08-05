@@ -60,8 +60,18 @@ class App
       $this->view->rend('Board.php', $threads);
     } elseif ($action[1] === 'post') {
       $user_name = $_POST['user_name'];
+      // user_nameが空の場合、固定値を指定
+      if (empty($user_name)) {
+        $user_name = '名無しさん';
+      }
       $body      = $_POST['body'];
+      if (empty($body)) {
+        header('Location: http://localhost:8002');
+        exit;
+      }
+
       $this->dbcon->postThread($user_name, $body);
+      header('Location: http://localhost:8002');
     } else {
       // 404エラーページのレンダリング
       header('HTTP/1.0 404 Not Found');
