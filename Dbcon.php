@@ -28,7 +28,6 @@ class Dbcon
       // $stmtの実行
       $stmt->execute();
 
-      echo '投稿が完了しました';
     // 失敗時の処理
     } catch (PDOException $e) {
       echo "接続失敗: " . $e->getMessage() . "\n";
