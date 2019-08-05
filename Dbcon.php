@@ -7,13 +7,17 @@ class Dbcon
     $dsn = 'mysql:dbname=2ch_db; host=localhost:8889';
     $user = 'root';
     $password = 'root';
-    $dbh = new PDO($dsn, $user, $password);
-
+    $options = array(PDO::MYSQL_ATTR_INIT_COMMAND =>"SET CHARACTER SET 'utf8'");
+    $dbh = new PDO($dsn, $user, $password, $options);
+    $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    return $dbh;
+  }
+    
+  public function postThread($user_name, $body)
+  {
     // 条件分岐ー成功時の処理
     try {
-      $user_name = 'user';
-      $body = 'body';
-
+      $dbh = $this->dbConnect();
       $sql = "INSERT INTO threads(user_name, body) VALUES(:user_name, :body)";
       $stmt = $dbh->prepare($sql);
 
@@ -24,6 +28,7 @@ class Dbcon
       // $stmtの実行
       $stmt->execute();
 
+      echo '投稿が完了しました';
     // 失敗時の処理
     } catch (PDOException $e) {
       echo "接続失敗: " . $e->getMessage() . "\n";
