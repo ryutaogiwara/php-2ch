@@ -10,11 +10,11 @@
     <form action="http://localhost:8002/post" method="post">
       <div>
         <label for="user_name">投稿者：</label><br>
-        <textarea id="text" name="user_name" cols="20" rows="1" maxlength="20" placeholder="投降者名"></textarea>
+        <textarea id="text" name="user_name" cols="20" rows="1" maxlength="20" placeholder="名無しさん"></textarea>
       </div>
       <div>
         <label for="body">投稿内容：</label><br>
-        <textarea id="text" name="body" cols="50" rows="6" maxlength="255" placeholder="投稿内容"></textarea>
+        <textarea id="text" name="body" cols="50" rows="6" maxlength="255" placeholder="投稿内容（必須）"></textarea>
       </div>
       <p><input type="submit" value="送信"></p>
     </form>
