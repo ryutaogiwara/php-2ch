@@ -59,8 +59,8 @@ class App
       // ⑤引数を置くことで対応するビューのレンダリング
       $this->view->rend('Board.php', $threads);
     } elseif ($action[1] === 'post') {
-      $user_name = '最終';
-      $body = $_POST['body'];
+      $user_name = $_POST['user_name'];
+      $body      = $_POST['body'];
       $this->dbcon->postThread($user_name, $body);
     } else {
       // 404エラーページのレンダリング
