@@ -60,7 +60,7 @@ class App
       $this->view->rend('Board.php', $threads);
     } elseif ($action[1] === 'post') {
       $user_name = '最終';
-      $body = '確認';
+      $body = $_POST['body'];
       $this->dbcon->postThread($user_name, $body);
     } else {
       // 404エラーページのレンダリング
