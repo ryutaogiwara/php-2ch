@@ -62,6 +62,7 @@ class App
       $user_name = $_POST['user_name'];
       $body      = $_POST['body'];
       $this->dbcon->postThread($user_name, $body);
+      header('Location: http://localhost:8002');
     } else {
       // 404エラーページのレンダリング
       header('HTTP/1.0 404 Not Found');
