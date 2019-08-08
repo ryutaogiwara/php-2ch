@@ -18,11 +18,18 @@ class Dbcon
     // 条件分岐ー成功時の処理
     try {
       $dbh = $this->dbConnect();
-      $sql = "INSERT INTO threads(user_name, body) VALUES(:user_name, :body)";
+
+      // 投稿日時の設定
+      $date = new DateTime();
+      $date->setTimezone(new DateTimeZone('Asia/Tokyo'));
+      $created_at = $date->format('Y-m-d H-i-s');
+
+      $sql = "INSERT INTO threads(user_name, body, created_at) VALUES(:user_name, :body, :created_at)";
       $stmt = $dbh->prepare($sql);
 
       $stmt->bindParam(':user_name', $user_name, PDO::PARAM_STR);
       $stmt->bindParam(':body', $body, PDO::PARAM_STR);
+      $stmt->bindParam(':created_at', $created_at, PDO::PARAM_STR);
       // var_dump($stmt);
 
       // $stmtの実行
