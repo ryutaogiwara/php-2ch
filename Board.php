@@ -19,21 +19,16 @@
       <p><input type="submit" value="送信"></p>
     </form>
   </div>
-  <?php
-  for ($i = 0; $i < count($threads); $i += 1) {
-    if ($i % 3 === 0) {
-      echo '<div>' . $threads[$i]['id'] . '</div>';
-      echo '<div style="color:blue;">' . $threads[$i]['name'] . '</div>';
-      echo '<div>' . $threads[$i]['body'] . '</div>';
-      echo '</br>';
-    } else {
-      echo '<div>' . $threads[$i]['id'] . '</div>';
-      echo '<div style="color:blue;">' . $threads[$i]['name'] . '</div>';
-      echo '<div>' . $threads[$i]['body'] . '</div>';
-      echo '</br>';
-    }
-  }
-  ?>
+  <div>
+    <!-- 配列の入れ子構造になっているためthreads as thread が必要 -->
+    <!-- 開始タグはコロン。閉じタグはセミコロン。 -->
+    <?php foreach ($threads as $thread) : ?>
+      <div><?php echo $thread['id'] ?></div>
+      <div><?php echo $thread['user_name'] ?></div>
+      <div><?php echo $thread['body'] ?></div>
+      <br>
+    <?php endforeach; ?>
+  </div>
 </body>
 
 </html>

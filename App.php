@@ -49,14 +49,10 @@ class App
     $action = $this->split($path_info);
 
     if (isset($action[1]) && $action[1] === '') {
-      // Board.phpを読み込むための処理
-      // Data.phpの読み込み
-      require('Data.php');
-      // Dataクラス（処理）を一つの変数＄dataとして定義（インスタンス化）
-      $data = new Data;
-      // dataインスタンス内のgetTreadsメソッドを実行し結果を$threadsと定義
-      $threads = $data->getThreads();
+      // getThreadsメソッドから引き出したデータを$threadsに入れる
+      $threads = $this->dbcon->getThreads();
       // ⑤引数を置くことで対応するビューのレンダリング
+      // ビューの雛形であるBoard.phpに$threadsを代入指定いく
       $this->view->rend('Board.php', $threads);
     } elseif ($action[1] === 'post') {
       $user_name = $_POST['user_name'];
@@ -69,7 +65,6 @@ class App
         header('Location: http://localhost:8002');
         exit;
       }
-
       $this->dbcon->postThread($user_name, $body);
       header('Location: http://localhost:8002');
     } else {

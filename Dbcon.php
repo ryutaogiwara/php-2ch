@@ -38,4 +38,15 @@ class Dbcon
     // $pdo = new PDO('mysql:dbname=2ch_db; host=localhost:8889', 'root', 'root', $options);
 
   }
+
+  public function getThreads()
+  {
+      $dbh = $this->dbConnect();
+      $stmt = $dbh->prepare("select * from threads");
+      // $stmtの実行
+      $stmt->execute();
+      // fetchAllした内容は配列の中に配列が格納された状態
+      $res = $stmt->fetchAll();
+      return $res;
+  }
 }
