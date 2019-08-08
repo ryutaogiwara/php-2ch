@@ -4,7 +4,7 @@
 
 </head>
 
-<body>
+<body style="background-color:darkgray">
   <h1>2ch</h1>
   <div>
     <form action="http://localhost:8002/post" method="post">
@@ -23,8 +23,11 @@
     <!-- 配列の入れ子構造になっているためthreads as thread が必要 -->
     <!-- 開始タグはコロン。閉じタグはセミコロン。 -->
     <?php foreach ($threads as $thread) : ?>
-      <div><?php echo $thread['id'] ?></div>
-      <div><?php echo $thread['user_name'] ?></div>
+      <div>
+        <span style="margin-right: 15px;"><?php echo $thread['id'] ?></span>
+        <span style="color:blue; margin-right:15px;"><?php echo $thread['user_name'] ?></span>
+        <span style="color:lime"><?php echo $thread['created_at'] ?></span>
+      </div>
       <div><?php echo $thread['body'] ?></div>
       <br>
     <?php endforeach; ?>
