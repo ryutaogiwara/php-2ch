@@ -27,6 +27,7 @@ class Dbcon
       $sql = "INSERT INTO threads(user_name, body, created_at) VALUES(:user_name, :body, :created_at)";
       $stmt = $dbh->prepare($sql);
 
+      // バインド機構（SQLインジェクション）
       $stmt->bindParam(':user_name', $user_name, PDO::PARAM_STR);
       $stmt->bindParam(':body', $body, PDO::PARAM_STR);
       $stmt->bindParam(':created_at', $created_at, PDO::PARAM_STR);
