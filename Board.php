@@ -23,12 +23,13 @@
     <!-- 配列の入れ子構造になっているためthreads as thread が必要 -->
     <!-- 開始タグはコロン。閉じタグはセミコロン。 -->
     <?php foreach ($threads as $thread) : ?>
+      <!-- エスケープ処理 $this->escape() View.php内にてescapeメソッドを定義-->
       <div>
-        <span style="margin-right: 15px;"><?php echo $thread['id'] ?></span>
-        <span style="color:blue; margin-right:15px;"><?php echo $thread['user_name'] ?></span>
-        <span style="color:lime"><?php echo $thread['created_at'] ?></span>
+        <span style="margin-right: 15px;"><?php echo $this->escape($thread['id']) ?></span>
+        <span style="color:blue; margin-right:15px;"><?php echo $this->escape($thread['user_name']) ?></span>
+        <span style="color:lime"><?php echo $this->escape($thread['created_at']) ?></span>
       </div>
-      <div><?php echo $thread['body'] ?></div>
+      <div><?php echo $this->escape($thread['body']) ?></div>
       <br>
     <?php endforeach; ?>
   </div>
